@@ -1,0 +1,23 @@
+ .navbar-category{
+     margin-left: auto;
+ }
+
+
+ .post-card{
+     max-width: 400px;
+     min-width: 400px;
+ }
+
+ .like-button {
+    background: transparent;
+    border: none;
+  }
+
+  .like-button:active {
+  opacity: 0.5;
+    }
+
+  .like-button:hover svg {
+    fill: blue;
+ 
+  }

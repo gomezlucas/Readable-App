@@ -56,7 +56,7 @@ function get (token, id) {
 }
 
 function getAll (token) {
-  return new Promise((res) => {
+   return new Promise((res) => {
     const posts = getData(token)
     let keys = Object.keys(posts)
     let filtered_keys = keys.filter(key => !posts[key].deleted)
@@ -67,7 +67,7 @@ function getAll (token) {
 function add (token, post) {
   return new Promise((res) => {
     let posts = getData(token)
-
+    console.log(post, 'que me llega')
     posts[post.id] = {
       id: post.id,
       timestamp: post.timestamp,
@@ -85,9 +85,10 @@ function add (token, post) {
 }
 
 function vote (token, id, option) {
-  return new Promise((res) => {
+   return new Promise((res) => {
     let posts = getData(token)
     post = posts[id]
+    console.log('encontro', id, option)
     switch(option) {
         case "upVote":
             post.voteScore = post.voteScore + 1

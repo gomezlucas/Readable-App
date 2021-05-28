@@ -208,7 +208,7 @@ app.delete('/posts/:id', (req, res) => {
 })
 
 app.post('/posts/:id', bodyParser.json(), (req, res) => {
-    const { option } = req.body
+      const { option } = req.body
     const id = req.params.id
     posts.vote(req.token, id, option)
       .then(
@@ -315,5 +315,5 @@ app.delete('/comments/:id', (req, res) => {
 })
 
 app.listen(config.port, () => {
-  console.log('Server listening on port %s, Ctrl+C to stop', config.port)
+  console.log('Server listening on port %s, Ctrl+C to stop' , config.port)
 })
