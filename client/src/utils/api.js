@@ -43,6 +43,8 @@ export const deletePost = (id) =>
   })
     .then(res => res.json())
 
+
+
 export const addPost = (post) => {
   let postObj = {
     ...post,
@@ -55,6 +57,19 @@ export const addPost = (post) => {
     body: JSON.stringify(postObj)
   })
     .then(res => res.json())
-
 }
+
+export const editPost = (post) => {
+  let postObj = {
+    title: post.title,
+    body: post.body,
+  }
+  return fetch(`${api}/posts/${post.id}`, {
+    method: 'put',
+    headers,
+    body: JSON.stringify(postObj)
+  })
+    .then(res => res.json())
+}
+
 

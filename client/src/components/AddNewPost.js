@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { handleAddPost } from '../actions/posts'
+import { handleAddPost, handleEditPost } from '../actions/posts'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 class AddNewPost extends Component {
-    
+
+
     state = {
-        title: this.props.title || '',
-        author: this.props.author || '',
-        category: 'react',
+        author: '',
+        category: '',
+        title: '',
         body: '',
         toHome: false
+
     }
+
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps.id, this.props.id)
+        
+           this.setState({
+            author: nextProps.post.author,
+            category: nextProps.post.category,
+            title: nextProps.post.title,
+            body: nextProps.post.body,
+          })
+     }
+
+
+     componentDidMount() {
+         if (this.props.post){
+             this.setState({
+              author: this.props.post.author,
+              category: this.props.post.category,
+              title: this.props.post.title,
+              body: this.props.post.body,
+            })
+
+         }
+     }
 
     handleOnChange = (e) => {
         const { name, value } = e.target
@@ -22,7 +49,7 @@ class AddNewPost extends Component {
         }))
     }
 
-    handleOnSubmit = (e) => {
+    handleOnSubmitNew = (e) => {
         e.preventDefault()
         const { title, author, category, body } = this.state
         const { dispatch } = this.props
@@ -40,6 +67,24 @@ class AddNewPost extends Component {
     }
 
 
+    handleOnSubmitEdit = (e) => {
+        e.preventDefault()
+        const { dispatch, post } = this.props
+        const { title, body } = this.state
+
+        dispatch(handleEditPost({
+            title, body, id: post.id
+        }))
+        this.setState(() => ({
+            title: '',
+            author: '',
+            category: 'react',
+            body: '',
+            toHome: true
+        }))
+
+    }
+
     render() {
         const { toHome } = this.state
         const { post } = this.props
@@ -51,7 +96,7 @@ class AddNewPost extends Component {
             <>
                 <h3 className='text-center mb-5 mt-5'> {post ? "Edit Post" : "Create New Post"}  </h3>
                 {JSON.stringify(this.state)}
-                <Form className="w-75 mx-auto" onSubmit={this.handleOnSubmit} >
+                <Form className="w-75 mx-auto" onSubmit={post ? this.handleOnSubmitEdit : this.handleOnSubmitNew} >
                     <Form.Group controlId="option1" className="mb-3">
                         <Form.Label>Title</Form.Label>
                         <Form.Control
@@ -61,34 +106,37 @@ class AddNewPost extends Component {
                             value={this.state.title}
                             onChange={this.handleOnChange}
                         />
-
-
                     </Form.Group>
-                    <Form.Group controlId="option1" className="mb-3">
-                        <Form.Label>Author</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Author"
-                            name='author'
-                            onChange={this.handleOnChange}
-                            defaultValue={post && post.author}
 
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label >Choose Category</Form.Label>
-                        <Form.Control
-                            name="category"
-                            onChange={this.handleOnChange}
-                            as="select" custom
-                            className="d-block"
-                            defaultValue={post && post.category}
-                        >
-                            <option>React</option>
-                            <option>Redux</option>
-                            <option>Udacity</option>
-                        </Form.Control>
-                    </Form.Group>
+                    {!post &&
+                        <>
+                            <Form.Group controlId="option1" className="mb-3">
+                                <Form.Label>Author</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter Author"
+                                    name='author'
+                                    onChange={this.handleOnChange}
+                                    defaultValue={post && post.author}
+
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label >Choose Category</Form.Label>
+                                <Form.Control
+                                    name="category"
+                                    onChange={this.handleOnChange}
+                                    as="select" custom
+                                    className="d-block"
+                                    defaultValue={post && post.category}
+                                >
+                                    <option>React</option>
+                                    <option>Redux</option>
+                                    <option>Udacity</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </>}
+
 
 
                     <Form.Group controlId="option2" className="mb-3">
@@ -108,8 +156,8 @@ class AddNewPost extends Component {
                             type="submit"
                             disabled={this.state.title === '' || this.state.body === '' || this.state.author === ''}
                         >
-                            Add New Post
-                  </Button>
+                            {post ? "Edit Post" : "Add New Post"}
+                        </Button>
                     </div>
                 </Form>
             </>
@@ -121,10 +169,12 @@ function mapStateToProps({ posts }, props) {
     const { id } = props.match.params
     let post = id && posts.filter(p => p.id === id)[0]
 
-    console.log(id)
+    // console.log(id, post)
     return {
         post,
-        posts
+        posts,
+        id
+
     }
 }
 

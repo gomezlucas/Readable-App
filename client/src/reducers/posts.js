@@ -1,4 +1,11 @@
-import { RECEIVE_POSTS, UPVOTE_POST, DOWNVOTE_POST, DELETE_POST, ADD_POST } from '../actions/posts'
+import {
+    RECEIVE_POSTS,
+    UPVOTE_POST,
+    DOWNVOTE_POST,
+    DELETE_POST,
+    ADD_POST,
+    EDIT_POST
+} from '../actions/posts'
 
 
 export default function posts(state = [], action) {
@@ -8,7 +15,7 @@ export default function posts(state = [], action) {
                 ...action.post
             ]
         case UPVOTE_POST:
-             return [
+            return [
                 ...state.map(st => {
                     if (st.id === action.id) {
                         return { ...st, voteScore: st.voteScore + 1 }
@@ -26,17 +33,29 @@ export default function posts(state = [], action) {
                 })
             ]
         case DELETE_POST: {
-            const postFiltered = state.filter(st=> st.id !== action.id)
-        return [
-            ...postFiltered
-        ]
-    }
-    case ADD_POST: {
-        return [
-            ...state, 
-            action.post
-        ]
-    }
+            const postFiltered = state.filter(st => st.id !== action.id)
+            return [
+                ...postFiltered
+            ]
+        }
+        case ADD_POST: {
+            return [
+                ...state,
+                action.post
+            ]
+        }
+        case EDIT_POST: {
+            
+            return [
+                ...state.map(st => {
+                    if (st.id === action.post.id) {
+                        return { ...st, body: action.post.body, title: action.post.title }
+                    }
+                    return st
+                })
+            ]
+
+        }
         default:
             return state
     }

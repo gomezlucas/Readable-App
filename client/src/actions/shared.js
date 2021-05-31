@@ -9,13 +9,8 @@ export function handleInitialData() {
         return (getInitialData()
         .then((posts)=>{
             dispatch(receivePosts(posts))
-       //     console.log(posts, 'the posts aree')
-     //       posts.forEach(post => dispatch(receivePosts(post))
-            //)
-        
+       
         })
-
-
         )
         
     }

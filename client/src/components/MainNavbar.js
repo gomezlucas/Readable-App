@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { connect } from 'react-redux'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -20,4 +21,9 @@ function MainNavbar() {
 }
 
 
-export default MainNavbar;
+function mapStateToProps({ orderBy }) {
+     return { orderBy }
+
+}
+
+export default connect(mapStateToProps)(MainNavbar);
