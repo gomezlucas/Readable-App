@@ -10,7 +10,7 @@ class AddNewPost extends Component {
 
     state = {
         author: '',
-        category: '',
+        category: 'react',
         title: '',
         body: '',
         toHome: false

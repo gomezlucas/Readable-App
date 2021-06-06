@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
 import {setOrderBy} from '../actions/order'
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 
 class Filters extends Component {
 
@@ -17,8 +17,9 @@ class Filters extends Component {
 
     onCategoryChange =(e) =>{
         const {dispatch} = this.props
+        const category = e.target.value
         console.log(e.target.value)
-        
+        this.props.history.push(`/category/${category}`);
     }
 
     render() {
@@ -55,6 +56,7 @@ class Filters extends Component {
                                 <Form.Label as="legend">Choose Category</Form.Label>
                                 <Form.Control as="select" size="md" className='w-100' custom 
                                 onChange={this.onCategoryChange}
+                                defaultValue={this.props.categoryPath}
                                 >
                                     <option value="all">All</option>
                                     <option value="react">React</option>
@@ -72,8 +74,20 @@ class Filters extends Component {
 
 }
 
-function mapStateToProps({ orderBy }) {
-      return { orderBy }
+function mapStateToProps({ orderBy, category }, props) {
+      console.log(props.location.pathname)
+      const pathname = props.location.pathname
+    let categoryPath = ''
+      if (pathname){
+          let categor = pathname.split('/')[2]
+          if (categor ==="react" || categor ==="redux" || categor ==="udacity"){
+            categoryPath = categor
+          }else{
+              categoryPath = 'all'
+          }
+      }
+
+    return { orderBy, categoryPath}
 }
 
-export default connect(mapStateToProps)(Filters)
+export default withRouter(connect(mapStateToProps)(Filters))

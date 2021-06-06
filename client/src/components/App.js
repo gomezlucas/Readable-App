@@ -19,10 +19,10 @@ class App extends Component {
       <Router>
         <Container>
           <MainNavbar />
-          <Filters />
           <Switch>
             <Route path='/add' component={AddNewPost} />
             <Route exact path='/edit/:id' component={AddNewPost} />
+            <Route exact path='/category/:category' component={PostContainer} />
             <Route exact path='/' component={PostContainer} />
           </Switch>
         </Container>

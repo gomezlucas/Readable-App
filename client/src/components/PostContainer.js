@@ -5,6 +5,7 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import Button from 'react-bootstrap/Button'
 import PostCard from './PostCard'
 import { Link } from 'react-router-dom'
+import Filters from './Filters'
 
 class PostContainer extends Component {
     render() {
@@ -12,6 +13,7 @@ class PostContainer extends Component {
 
         return (
             <Container>
+                <Filters />
                 <Link to="/Add">
                     <Button variant="outline-dark" style={{ margin: ' 1rem 0 1rem auto' }} type="submit"  >
                         Add New Post
@@ -26,17 +28,27 @@ class PostContainer extends Component {
 }
 
 
-function mapStateToProps({ posts, orderBy }) {
+function mapStateToProps({ posts, orderBy }, props) {
  
-console.log(posts)
-console.log(orderBy)
-let sorted = []
-if (orderBy === "timestamp"){
-    sorted = [ ...posts].sort((a,b)=>b.timestamp - a.timestamp)
-}else{ 
-    sorted = [ ...posts].sort((a,b)=>b.voteScore - a.voteScore)
+const pathname = props.location.pathname
+let postsFilter = [...posts]
+console.log(postsFilter)
+
+let categoryType =  pathname && pathname.split('/')[2]
+if(categoryType && categoryType !== 'all'){
+    postsFilter = posts.filter(p=>{
+        return p.category.toLowerCase() === categoryType.toLowerCase()})
 }
 
+ let sorted = []
+if (orderBy === "timestamp"){
+    console.log('entro?', postsFilter)
+    sorted = [ ...postsFilter].sort((a,b)=>b.timestamp - a.timestamp)
+}else{ 
+    sorted = [ ...postsFilter].sort((a,b)=>b.voteScore - a.voteScore)
+}
+
+    console.log(sorted)
     return { sorted}
 }
 
