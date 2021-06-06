@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { connect } from 'react-redux'
 import {setOrderBy} from '../actions/order'
-
+import {Link} from 'react-router-dom'
 
 class Filters extends Component {
 
@@ -14,6 +14,12 @@ class Filters extends Component {
         const {id} = e.target
         dispatch(setOrderBy(id))
             }
+
+    onCategoryChange =(e) =>{
+        const {dispatch} = this.props
+        console.log(e.target.value)
+        
+    }
 
     render() {
         return (
@@ -47,10 +53,13 @@ class Filters extends Component {
                             </Col>
                             <Col sm={6}>
                                 <Form.Label as="legend">Choose Category</Form.Label>
-                                <Form.Control as="select" size="md" className='w-100' custom  >
-                                    <option>React</option>
-                                    <option>Redux</option>
-                                    <option>Udacity</option>
+                                <Form.Control as="select" size="md" className='w-100' custom 
+                                onChange={this.onCategoryChange}
+                                >
+                                    <option value="all">All</option>
+                                    <option value="react">React</option>
+                                    <option value="redux">Redux</option>
+                                    <option value="udacity">Udacity</option>
                                 </Form.Control>
                             </Col>
                         </Form.Group>

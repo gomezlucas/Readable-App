@@ -4,11 +4,11 @@ import Container from 'react-bootstrap/Container'
 import CardDeck from 'react-bootstrap/CardDeck'
 import Button from 'react-bootstrap/Button'
 import PostCard from './PostCard'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class PostContainer extends Component {
     render() {
-        const { posts } = this.props
+        const { sorted } = this.props
 
         return (
             <Container>
@@ -18,7 +18,7 @@ class PostContainer extends Component {
                   </Button>
                 </Link>
                 <CardDeck className='my-5' style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                    {posts.map(p => <PostCard id={p.id} key={p.id} />)}
+                    {sorted.map(p => <PostCard id={p.id} key={p.id} />)}
                 </CardDeck>
             </Container>
         )
@@ -26,10 +26,18 @@ class PostContainer extends Component {
 }
 
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts, orderBy }) {
  
+console.log(posts)
+console.log(orderBy)
+let sorted = []
+if (orderBy === "timestamp"){
+    sorted = [ ...posts].sort((a,b)=>b.timestamp - a.timestamp)
+}else{ 
+    sorted = [ ...posts].sort((a,b)=>b.voteScore - a.voteScore)
+}
 
-    return { posts }
+    return { sorted}
 }
 
 export default connect(mapStateToProps)(PostContainer)
