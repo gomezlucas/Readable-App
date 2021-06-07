@@ -26,6 +26,15 @@ export const getInitialData = () =>
     })
 
 
+  export const getComments = (id)=>
+   fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => {
+      console.log('getcomments', data)
+      return data
+   })
+   
+  
 export const updateVote = (id, vote) =>
 
   fetch(`${api}/posts/${id}`, {

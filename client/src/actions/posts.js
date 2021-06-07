@@ -15,7 +15,7 @@ export function receivePosts(post) {
 }
 
 
-
+ 
 function upvotePost(id) {
     return {
         type: UPVOTE_POST,

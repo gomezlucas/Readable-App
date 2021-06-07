@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { AiOutlineLike, AiOutlineDislike } from 'react-icons/ai';
 import { handleUpVotePost, handleDownVotePost, handleDeletePost } from '../actions/posts'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class PostCard extends Component {
 
@@ -31,16 +31,17 @@ class PostCard extends Component {
         return (
             <Card className='post-card  mx-auto mt-4'>
                 <Card.Body>
-                    <Card.Title>{post.title}</Card.Title>
+                    <Link to={`/post/${post.id}`} style={{textDecoration: 'none', color: 'darkBlue'}}>
+                        <Card.Title>{post.title}</Card.Title>
+                    </Link>
                     <Card.Subtitle className="mb-2 text-muted text-capitalize">by {post.author}</Card.Subtitle>
-
                     <Card.Text>
                         {post.body}
                     </Card.Text>
                     <div style={{ textAlign: "right" }}>
                         <Button variant="outline-danger" onClick={this.onDelete} >Delete</Button>
                         <Link to={`/edit/${post.id}`} >
-                        <Button variant="outline-primary"  style={{ marginLeft: "1rem" }}>Edit</Button>
+                            <Button variant="outline-primary" style={{ marginLeft: "1rem" }}>Edit</Button>
                         </Link>
                     </div>
                 </Card.Body>
@@ -77,7 +78,6 @@ class PostCard extends Component {
 function mapStateToProps({ posts }, { id }) {
     const post = posts.filter(post => post.id === id)[0]
     const date = new Date(post.timestamp).toLocaleDateString("en-US")
-
     return {
         post,
         date

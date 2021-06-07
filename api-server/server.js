@@ -236,9 +236,11 @@ app.put('/posts/:id', bodyParser.json(), (req, res) => {
 })
 
 app.get('/posts/:id/comments', (req, res) => {
-    comments.getByParent(req.token, req.params.id)
+     comments.getByParent(req.token, req.params.id)
       .then(
-          (data) => res.send(data),
+          (data) => {
+            console.log(data)
+            return res.send(data)},
           (error) => {
               console.error(error)
               res.status(500).send({
