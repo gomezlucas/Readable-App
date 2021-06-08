@@ -7,16 +7,26 @@ import Button from 'react-bootstrap/Button'
 import { AiOutlineLike, AiFillLike, AiFillDislike, AiOutlineDislike } from 'react-icons/ai';
 import CommentsContainer from './CommentsContainer'
 import { handleUpVotePost, handleDownVotePost, handleDeletePost } from '../actions/posts'
-import {handleComments} from '../actions/comments'
- 
+import { handleComments } from '../actions/comments'
+import AddNewComment from './AddNewComment'
+
 class Post extends Component {
 
+    state = {
+        showAddComments: false
+    }
+
+    toggleShowComments = () => {
+        this.setState((prev) => ({
+            showAddComments: !prev.showAddComments
+        }))
+    }
 
     componentDidMount() {
         const { id, dispatch } = this.props
-         dispatch(handleComments(id))
+        dispatch(handleComments(id))
     }
-       
+
 
 
     handleUpVote = (e) => {
@@ -36,10 +46,10 @@ class Post extends Component {
     }
 
     render() {
-        const {post, date} = this.props
-        
+        const { post, date } = this.props
+
         if (!post) {
-            return  <h3>Loading ...</h3>
+            return <h3>Loading ...</h3>
         }
 
         const { title } = post
@@ -50,7 +60,7 @@ class Post extends Component {
                         <Card.Title>{title}</Card.Title>
                         <Card.Text>
                             {post.body}
-                </Card.Text>
+                        </Card.Text>
                         <div style={{ textAlign: "right" }}>
                             <Button variant="outline-danger" onClick={this.onDelete}>Delete</Button>
                             <Button variant="outline-primary" style={{ marginLeft: "1rem" }}>Edit</Button>
@@ -65,27 +75,30 @@ class Post extends Component {
                                 <p className="text-muted text-center">{post.commentCount} comments</p>
                             </Col>
                             <Col sm={4} style={{ textAlign: "right" }}>
-                                    <div >
-                                <small > Votes {post.voteScore} </small>
-                                <button className="like-button"
-                                    onClick={this.handleUpVote}
-                                >
-                                    <AiOutlineLike size={25} />
-                                </button>
-                                <button className="like-button"
-                                    onClick={this.handleDownVote}
-                                >
-                                    <AiOutlineDislike size={25} />
-                                </button>
-                            </div>
+                                <div >
+                                    <small > Votes {post.voteScore} </small>
+                                    <button className="like-button"
+                                        onClick={this.handleUpVote}
+                                    >
+                                        <AiOutlineLike size={25} />
+                                    </button>
+                                    <button className="like-button"
+                                        onClick={this.handleDownVote}
+                                    >
+                                        <AiOutlineDislike size={25} />
+                                    </button>
+                                </div>
                             </Col>
                         </Row>
                     </Card.Footer>
                 </Card>
                 <div style={{ textAlign: "right" }}>
-                    <Button variant="outline-dark mt-2 mr-auto" >Add New Comment</Button>
+                    <Button variant="outline-dark mt-2 mr-auto" onClick={this.toggleShowComments} >Add New Comment</Button>
                 </div>
-                <CommentsContainer  />
+                {
+                    this.state.showAddComments && < AddNewComment />
+                }
+                <CommentsContainer />
             </div>
         )
     }
@@ -93,12 +106,12 @@ class Post extends Component {
 
 function mapStateToProps({ posts }, props) {
     const { id } = props.match.params
-    const post =  posts ? posts.filter(p=> p.id === id)[0] : []
+    const post = posts ? posts.filter(p => p.id === id)[0] : []
     const date = post && new Date(post.timestamp).toLocaleDateString("en-US")
     return {
-            id,
-            post,
-            date
+        id,
+        post,
+        date
     }
 }
 

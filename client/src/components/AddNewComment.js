@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 function AddNewComment() {
     return (
         <>
-            <h3 className='text-center mb-5 mt-5'> Create New Post </h3>
+            <h3 className='text-center mb-5 mt-5'> Create New Comment </h3>
 
             <Form className="w-75 mx-auto " >
         
@@ -25,7 +25,7 @@ function AddNewComment() {
             </Form.Group>
             <div style={{textAlign: 'right'}}>
             <Button variant="outline-dark" style={{ margin: ' 1rem 0 1rem auto' }} type="submit"  >
-                        Add New Post // Edit
+                        Add New Comment // Edit
         </Button>
             </div>
         </Form>

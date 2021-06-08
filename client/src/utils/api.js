@@ -36,7 +36,6 @@ export const getInitialData = () =>
    
   
 export const updateVote = (id, vote) =>
-
   fetch(`${api}/posts/${id}`, {
     method: 'POST',
     headers,
@@ -82,3 +81,19 @@ export const editPost = (post) => {
 }
 
 
+
+export const deleteCommentApi = (id) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers
+  })
+    .then(res => res.json())
+
+
+export const updateCommentVote = (id, vote) =>
+fetch(`${api}/comments/${id}`, {
+  method: 'POST',
+  headers,
+  body: JSON.stringify({ option: vote })
+})
+  .then(res => res.json())
