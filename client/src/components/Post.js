@@ -52,14 +52,14 @@ class Post extends Component {
             return <h3>Loading ...</h3>
         }
 
-        const { title } = post
+        const { title, body,voteScore, id } = post
         return (
             <div>
                 <Card className='   mx-auto mt-4'>
                     <Card.Body>
                         <Card.Title>{title}</Card.Title>
                         <Card.Text>
-                            {post.body}
+                            {body}
                         </Card.Text>
                         <div style={{ textAlign: "right" }}>
                             <Button variant="outline-danger" onClick={this.onDelete}>Delete</Button>
@@ -76,7 +76,7 @@ class Post extends Component {
                             </Col>
                             <Col sm={4} style={{ textAlign: "right" }}>
                                 <div >
-                                    <small > Votes {post.voteScore} </small>
+                                    <small > Votes {voteScore} </small>
                                     <button className="like-button"
                                         onClick={this.handleUpVote}
                                     >
@@ -96,7 +96,7 @@ class Post extends Component {
                     <Button variant="outline-dark mt-2 mr-auto" onClick={this.toggleShowComments} >Add New Comment</Button>
                 </div>
                 {
-                    this.state.showAddComments && < AddNewComment />
+                    this.state.showAddComments && < AddNewComment parentId={id} />
                 }
                 <CommentsContainer />
             </div>

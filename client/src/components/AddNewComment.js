@@ -1,39 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import {connect} from 'react-redux'
+ import {addCommentAction} from '../actions/comments'
 
-function AddNewComment() {
-    return (
-        <>
-            <h3 className='text-center mb-5 mt-5'> Create New Comment </h3>
+class AddNewComment extends Component {
+    state={
+        author: '', 
+        body: ''
+    }
 
-            <Form className="w-75 mx-auto " >
+
+    handleOnChange = (e)=>{
+        const value = e.target.value
+        const name = e.target.name
+        this.setState((prev)=>({
+            [name]: value
+        }))
+    }
+
+    handleSubmit = (e) => {
         
-                <Form.Group controlId="option1" className="mb-3">
-                    <Form.Label>Author</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Author"
-                        name='text1'
-                    />
-                </Form.Group>
+        const {parentId, dispatch } = this.props
+        
+        e.preventDefault()
+        const comment = {
+            author: this.state.author, 
+            body: this.state.body, 
+            parentId
+         }
+         console.log('antes de enviar', comment)
+         dispatch(addCommentAction(comment))
+     }
 
-                <Form.Group controlId="option2" className="mb-3">
-                    <Form.Label>Comment</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        placeholder="Leave a comment here"
-                        style={{ height: '100px' }} />
-            </Form.Group>
-            <div style={{textAlign: 'right'}}>
-            <Button variant="outline-dark" style={{ margin: ' 1rem 0 1rem auto' }} type="submit"  >
-                        Add New Comment // Edit
-        </Button>
-            </div>
-        </Form>
-    </>
-    )
+    render() {
+        return (
+            <>
+                <h3 className='text-center mb-5 mt-5'> Create New Comment </h3>
+                {JSON.stringify(this.state)}
+                <Form className="w-75 mx-auto" >
 
+                    <Form.Group controlId="option1" className="mb-3">
+                        <Form.Label>Author</Form.Label>
+                        <Form.Control
+                            type="text" placeholder="Enter Author"
+                            name='author'
+                            onChange={this.handleOnChange}
+                        />
+                    </Form.Group>
 
+                    <Form.Group controlId="option2" className="mb-3">
+                        <Form.Label>Comment</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            onChange={this.handleOnChange}
+                            placeholder="Leave a comment here"
+                            name="body"
+                            style={{ height: '100px' }} />
+                    </Form.Group>
+                    <div style={{ textAlign: 'right' }}>
+                        <Button variant="outline-dark" style={{ margin: ' 1rem 0 1rem auto' }} type="submit"   onClick={this.handleSubmit} >
+                            Add New Comment  
+                    </Button>
+                    </div>
+                </Form>
+            </>
+        )
+    }
 }
 
 
-export default AddNewComment
+export default connect()(AddNewComment)

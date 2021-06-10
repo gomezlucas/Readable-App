@@ -97,3 +97,19 @@ fetch(`${api}/comments/${id}`, {
   body: JSON.stringify({ option: vote })
 })
   .then(res => res.json())
+
+
+  export const addComment = (comment) => {
+    let commentObj = {
+      ...comment,
+      id: generateUID(),
+      timestamp: Date.now()
+    }
+    console.log(comment)
+    return fetch(`${api}/comments`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(commentObj)
+    })
+      .then(res => res.json())
+  }

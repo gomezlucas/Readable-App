@@ -1,8 +1,9 @@
-import { getComments, deleteCommentApi, updateCommentVote } from '../utils/api'
+import { getComments, deleteCommentApi, updateCommentVote, addComment } from '../utils/api'
 
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const UPDATE_VOTE_COMMENT = 'UPDATE_VOTE_COMMENT'
+export const ADD_COMMENT = 'ADD_COMMENT'
 
 function receiveComments(comments) {
     return {
@@ -53,6 +54,22 @@ export function handleVoteComment(id, vote) {
     return (dispatch) => {
         return updateCommentVote(id, vote)
             .then(res => dispatch(updateCommentReducer(id, vote)))
+            .catch(err => console.log(err))
+    }
+}
+
+
+function addCommentReducer(comment) {
+    return {
+        type: ADD_COMMENT,
+        comment
+    }
+}
+
+export function addCommentAction(comment) {
+    return (dispatch) => {
+        return addComment(comment)
+            .then(res => console.log(res))
             .catch(err => console.log(err))
     }
 }
