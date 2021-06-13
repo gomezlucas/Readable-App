@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS, DELETE_COMMENT, UPDATE_VOTE_COMMENT } from '../actions/comments'
+import { RECEIVE_COMMENTS, DELETE_COMMENT, UPDATE_VOTE_COMMENT, ADD_COMMENT } from '../actions/comments'
 
 
 export default function comments(state = [], action) {
@@ -14,6 +14,8 @@ export default function comments(state = [], action) {
                 }
                 return item
             })]
+        case ADD_COMMENT:
+            return [...state, action.comment]
         default:
             return state
     }

@@ -18,9 +18,7 @@ class AddNewPost extends Component {
     }
 
 
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps.id, this.props.id)
-        
+    componentWillReceiveProps(nextProps) {       
            this.setState({
             author: nextProps.post.author,
             category: nextProps.post.category,
@@ -169,8 +167,7 @@ function mapStateToProps({ posts }, props) {
     const { id } = props.match.params
     let post = id && posts.filter(p => p.id === id)[0]
 
-    // console.log(id, post)
-    return {
+     return {
         post,
         posts,
         id

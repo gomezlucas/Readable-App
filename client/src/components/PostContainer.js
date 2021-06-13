@@ -32,8 +32,7 @@ function mapStateToProps({ posts, orderBy }, props) {
  
 const pathname = props.location.pathname
 let postsFilter = [...posts]
-console.log(postsFilter)
-
+ 
 let categoryType =  pathname && pathname.split('/')[2]
 if(categoryType && categoryType !== 'all'){
     postsFilter = posts.filter(p=>{
@@ -42,14 +41,12 @@ if(categoryType && categoryType !== 'all'){
 
  let sorted = []
 if (orderBy === "timestamp"){
-    console.log('entro?', postsFilter)
-    sorted = [ ...postsFilter].sort((a,b)=>b.timestamp - a.timestamp)
+     sorted = [ ...postsFilter].sort((a,b)=>b.timestamp - a.timestamp)
 }else{ 
     sorted = [ ...postsFilter].sort((a,b)=>b.voteScore - a.voteScore)
 }
 
-    console.log(sorted)
-    return { sorted}
+     return { sorted}
 }
 
 export default connect(mapStateToProps)(PostContainer)

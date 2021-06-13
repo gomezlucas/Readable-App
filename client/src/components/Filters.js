@@ -18,8 +18,7 @@ class Filters extends Component {
     onCategoryChange =(e) =>{
         const {dispatch} = this.props
         const category = e.target.value
-        console.log(e.target.value)
-        this.props.history.push(`/category/${category}`);
+         this.props.history.push(`/category/${category}`);
     }
 
     render() {
@@ -75,8 +74,7 @@ class Filters extends Component {
 }
 
 function mapStateToProps({ orderBy, category }, props) {
-      console.log(props.location.pathname)
-      const pathname = props.location.pathname
+       const pathname = props.location.pathname
     let categoryPath = ''
       if (pathname){
           let categor = pathname.split('/')[2]

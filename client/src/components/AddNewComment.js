@@ -19,18 +19,20 @@ class AddNewComment extends Component {
         }))
     }
 
-    handleSubmit = (e) => {
-        
+    handleSubmit = (e) => {     
         const {parentId, dispatch } = this.props
-        
         e.preventDefault()
         const comment = {
             author: this.state.author, 
             body: this.state.body, 
             parentId
          }
-         console.log('antes de enviar', comment)
-         dispatch(addCommentAction(comment))
+          dispatch(addCommentAction(comment))
+         this.setState(()=>({
+            author: '', 
+            body: ''
+         }))
+         this.props.setshowAddComments()
      }
 
     render() {
@@ -45,6 +47,7 @@ class AddNewComment extends Component {
                         <Form.Control
                             type="text" placeholder="Enter Author"
                             name='author'
+                            value={this.state.author}
                             onChange={this.handleOnChange}
                         />
                     </Form.Group>
@@ -55,6 +58,7 @@ class AddNewComment extends Component {
                             as="textarea"
                             onChange={this.handleOnChange}
                             placeholder="Leave a comment here"
+                            value={this.state.body}
                             name="body"
                             style={{ height: '100px' }} />
                     </Form.Group>

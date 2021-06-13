@@ -45,6 +45,12 @@ class Post extends Component {
         history.push('/')
     }
 
+    setshowAddComments = ()=>{
+        this.setState(()=>({ 
+            showAddComments: false
+        }))
+    }
+
     render() {
         const { post, date } = this.props
 
@@ -96,9 +102,9 @@ class Post extends Component {
                     <Button variant="outline-dark mt-2 mr-auto" onClick={this.toggleShowComments} >Add New Comment</Button>
                 </div>
                 {
-                    this.state.showAddComments && < AddNewComment parentId={id} />
+                    this.state.showAddComments && < AddNewComment parentId={id} setshowAddComments={this.setshowAddComments}  />
                 }
-                <CommentsContainer />
+                <CommentsContainer parentId={id} />
             </div>
         )
     }
@@ -108,7 +114,7 @@ function mapStateToProps({ posts }, props) {
     const { id } = props.match.params
     const post = posts ? posts.filter(p => p.id === id)[0] : []
     const date = post && new Date(post.timestamp).toLocaleDateString("en-US")
-    return {
+     return {
         id,
         post,
         date

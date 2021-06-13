@@ -24,18 +24,19 @@ export function handleComments(id) {
 
 
 
-function deleteComment(id) {
+function deleteComment(id, parentId) {
     return {
         type: DELETE_COMMENT,
-        id
+        id, 
+        parentId
     }
 }
 
 
-export function handleDeleteComment(id) {
+export function handleDeleteComment(id, parentId) {
     return (dispatch) => {
         return deleteCommentApi(id)
-            .then(res => dispatch(deleteComment(id)))
+            .then(res => dispatch(deleteComment(id, parentId)))
             .catch(err => console.log(err))
     }
 }
@@ -69,7 +70,7 @@ function addCommentReducer(comment) {
 export function addCommentAction(comment) {
     return (dispatch) => {
         return addComment(comment)
-            .then(res => console.log(res))
+            .then(res => dispatch(addCommentReducer(res)))
             .catch(err => console.log(err))
     }
 }

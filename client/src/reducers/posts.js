@@ -4,8 +4,11 @@ import {
     DOWNVOTE_POST,
     DELETE_POST,
     ADD_POST,
-    EDIT_POST
+    EDIT_POST,
 } from '../actions/posts'
+import {
+    ADD_COMMENT, DELETE_COMMENT
+} from '../actions/comments'
 
 
 export default function posts(state = [], action) {
@@ -45,7 +48,7 @@ export default function posts(state = [], action) {
             ]
         }
         case EDIT_POST: {
-            
+         
             return [
                 ...state.map(st => {
                     if (st.id === action.post.id) {
@@ -55,6 +58,26 @@ export default function posts(state = [], action) {
                 })
             ]
 
+        }
+        case ADD_COMMENT: {
+             return [
+                ...state.map(post=>{
+                    if (action.comment.parentId === post.id){
+                        return {...post, commentCount: post.commentCount + 1}
+                    }
+                    return post
+                })
+            ]
+        }
+        case DELETE_COMMENT:{
+             return [
+                ...state.map(post=>{
+                     if (action.parentId === post.id){
+                        return {...post, commentCount: post.commentCount - 1}
+                    }
+                    return post
+                })
+            ]
         }
         default:
             return state

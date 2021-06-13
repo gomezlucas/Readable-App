@@ -72,8 +72,7 @@ export function handleDeletePost(id) {
         return deletePost(id)
             .catch((e) => {
                 console.warn('Error deleting the Post', e)
-                /*add post again*/
-                alert('There was an error deleting the Post. Try again')
+                 alert('There was an error deleting the Post. Try again')
             })
     }
 }

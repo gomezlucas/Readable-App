@@ -13,15 +13,14 @@ class CommentsContainer extends Component {
 
     handleVote = (id, vote) => {
         const {  dispatch } = this.props
-        console.log(id, vote)
-        dispatch(handleVoteComment(id,vote))
+         dispatch(handleVoteComment(id,vote))
      }
 
   
 
     onDelete = (id) => {
-        const { dispatch } = this.props
-        dispatch(handleDeleteComment(id))
+        const { dispatch, parentId } = this.props
+        dispatch(handleDeleteComment(id, parentId))
      }
 
 
@@ -71,11 +70,10 @@ class CommentsContainer extends Component {
 }
 
 function mapStateToProps({ comments },props){
-    console.log(props)
-    const {id} = '555'
-    console.log(comments)
-    return{
-        id, comments
+    const {parentId} = props
+      return{
+        comments, 
+        parentId
     }
 }
 
