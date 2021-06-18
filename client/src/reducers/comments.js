@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS, DELETE_COMMENT, UPDATE_VOTE_COMMENT, ADD_COMMENT } from '../actions/comments'
+import { RECEIVE_COMMENTS, DELETE_COMMENT, UPDATE_VOTE_COMMENT, ADD_COMMENT,EDIT_COMMENT } from '../actions/comments'
 
 
 export default function comments(state = [], action) {
@@ -16,6 +16,13 @@ export default function comments(state = [], action) {
             })]
         case ADD_COMMENT:
             return [...state, action.comment]
+        case EDIT_COMMENT:
+            return [...state.map(item=>{
+                if(item.id=== action.comment.id){
+                    return action.comment
+                }
+                return item
+            })]
         default:
             return state
     }

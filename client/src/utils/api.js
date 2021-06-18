@@ -113,3 +113,18 @@ fetch(`${api}/comments/${id}`, {
     })
       .then(res => res.json())
   }
+
+  export const editComment = (comment) => {
+    console.log('entroo')
+    const commentObj ={
+      timestamp: Date.now(),
+      body: comment.body
+    }
+    console.log(commentObj, comment.id)
+    return fetch(`${api}/comments/${comment.id}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(commentObj),
+      })
+    .then(res=>res.json())
+  }
