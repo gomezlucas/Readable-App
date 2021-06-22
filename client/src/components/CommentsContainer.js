@@ -31,7 +31,7 @@ class CommentsContainer extends Component {
      handleEdit =(id ) =>{
         const { dispatch, parentId } = this.props
         this.setState({showEditForm: id})
-        console.log(this.state)
+          
      }
 
      clearEdit = () =>{

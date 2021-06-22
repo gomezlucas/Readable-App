@@ -39,9 +39,8 @@ class AddNewComment extends Component {
             ...comment,
             body: this.state.body,
         }
-
         dispatch(handleEditComment(commentObj))
-
+        this.props.clearEdit()
     }
 
     handleSubmit = (e) => {
@@ -58,7 +57,7 @@ class AddNewComment extends Component {
             body: ''
         }))
         this.props.setshowAddComments()
-    }
+     }
 
 
     cancelEdit = () => {
