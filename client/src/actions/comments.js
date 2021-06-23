@@ -84,8 +84,7 @@ function editCommentReducer(comment)  {
 }
 
 export function handleEditComment(comment) {
-    console.log(comment)
-    return (dispatch) => {
+     return (dispatch) => {
         return editComment(comment)
             .then(res => dispatch(editCommentReducer(res)))
             .catch(err => console.log(err))

@@ -239,8 +239,7 @@ app.get('/posts/:id/comments', (req, res) => {
      comments.getByParent(req.token, req.params.id)
       .then(
           (data) => {
-            console.log(data)
-            return res.send(data)},
+             return res.send(data)},
           (error) => {
               console.error(error)
               res.status(500).send({

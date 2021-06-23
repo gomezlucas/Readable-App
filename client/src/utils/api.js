@@ -30,8 +30,7 @@ export const getInitialData = () =>
    fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
     .then(data => {
-      console.log('getcomments', data)
-      return data
+       return data
    })
    
   
@@ -105,8 +104,7 @@ fetch(`${api}/comments/${id}`, {
       id: generateUID(),
       timestamp: Date.now()
     }
-    console.log(comment)
-    return fetch(`${api}/comments`, {
+     return fetch(`${api}/comments`, {
       method: 'POST',
       headers,
       body: JSON.stringify(commentObj)
@@ -115,13 +113,11 @@ fetch(`${api}/comments/${id}`, {
   }
 
   export const editComment = (comment) => {
-    console.log('entroo')
-    const commentObj ={
+     const commentObj ={
       timestamp: Date.now(),
       body: comment.body
     }
-    console.log(commentObj, comment.id)
-    return fetch(`${api}/comments/${comment.id}`, {
+     return fetch(`${api}/comments/${comment.id}`, {
       method: 'PUT',
       headers,
       body: JSON.stringify(commentObj),

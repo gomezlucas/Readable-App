@@ -67,8 +67,7 @@ function getAll (token) {
 function add (token, post) {
   return new Promise((res) => {
     let posts = getData(token)
-    console.log(post, 'que me llega')
-    posts[post.id] = {
+     posts[post.id] = {
       id: post.id,
       timestamp: post.timestamp,
       title: post.title,
@@ -88,8 +87,7 @@ function vote (token, id, option) {
    return new Promise((res) => {
     let posts = getData(token)
     post = posts[id]
-    console.log('encontro', id, option)
-    switch(option) {
+     switch(option) {
         case "upVote":
             post.voteScore = post.voteScore + 1
             break

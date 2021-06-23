@@ -70,8 +70,7 @@ class AddNewComment extends Component {
         return (
             <>
                 <h3 className='text-center mb-5 mt-5'> {comment ? 'Edit your Comment' : 'Create your Comment'} </h3>
-                {JSON.stringify(this.state)}
-                <Form className="w-75 mx-auto" >
+                 <Form className="w-75 mx-auto" >
 
                     <Form.Group controlId="option1" className="mb-3">
                         <Form.Label>Author</Form.Label>

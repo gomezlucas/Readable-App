@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { LinkContainer } from "react-router-bootstrap";
 import { withRouter } from 'react-router-dom'
+
+
+
 class MainNavbar extends Component {
     render() {
         const { categoryPath } = this.props
@@ -21,7 +24,6 @@ class MainNavbar extends Component {
             </Navbar>
         )
     }
-
 }
 
 

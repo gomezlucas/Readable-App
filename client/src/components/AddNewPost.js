@@ -19,13 +19,16 @@ class AddNewPost extends Component {
 
 
     componentWillReceiveProps(nextProps) {       
-           this.setState({
-            author: nextProps.post.author,
-            category: nextProps.post.category,
-            title: nextProps.post.title,
-            body: nextProps.post.body,
-          })
-     }
+        console.log(nextProps, 'que llegaa baby')
+        if (nextProps.post){
+            this.setState({
+                author: nextProps.post.author,
+                category: nextProps.post.category,
+                title: nextProps.post.title,
+                body: nextProps.post.body,
+              })
+        }
+         }
 
 
      componentDidMount() {
@@ -93,8 +96,7 @@ class AddNewPost extends Component {
         return (
             <>
                 <h3 className='text-center mb-5 mt-5'> {post ? "Edit Post" : "Create New Post"}  </h3>
-                {JSON.stringify(this.state)}
-                <Form className="w-75 mx-auto" onSubmit={post ? this.handleOnSubmitEdit : this.handleOnSubmitNew} >
+                 <Form className="w-75 mx-auto" onSubmit={post ? this.handleOnSubmitEdit : this.handleOnSubmitNew} >
                     <Form.Group controlId="option1" className="mb-3">
                         <Form.Label>Title</Form.Label>
                         <Form.Control
