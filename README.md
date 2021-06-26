@@ -4,10 +4,24 @@
 Readable is a content and comment web app. User are able to post content to predefined categories, comment on their post and other users' posts, and vote on posts and comments. Users also are able to delete posts and comments. 
 
 
+## Getting Started and Installing
+
+To run this project right away:
+
+* Install and start the API server
+    - `cd api-server`
+    - `npm install`
+    - `node server`
+* Install and start the Client 
+    - `cd client`
+    - `npm install`
+    - `npm start`
+
+
 
 # Client 
 
-Using this server, I will built a React/Redux front end for the application.  
+Using the server, I built a React/Redux front end for the application, with react bootstrap for the Styling.
 
 ## Views
 
@@ -38,27 +52,16 @@ Using this server, I will built a React/Redux front end for the application.
 ![edit](../client/public/images/edit.png)
 
 
-## Data
+
+## API Server
+The Api-Server repository includes the code for the backend API Server that I used to develop and interact with the front-end portion of the project. It was provided by the Udacity React Course. 
+
+### Data
 
 There are three types of objects stored on the server:
 - Categories
 - Posts
 - Comments
 
-
-## Start Developing
-
-To run this project right away:
-
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* Install and start the Client 
-    - `cd client`
-    - `npm start`
-
-## API Server
-The Api-Server repository includes the code for the backend API Server that I used to develop and interact with the front-end portion of the project. It was provided by the Udacity React Course. 
 
 Information about the API server and how to use it can be found in its [README file](api-server/README.md).
