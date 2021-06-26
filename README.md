@@ -18,7 +18,6 @@ To run this project right away:
     - `npm start`
 
 
-
 # Client 
 
 Using the server, I built a React/Redux front end for the application, with react bootstrap for the Styling.
@@ -30,11 +29,11 @@ Using the server, I built a React/Redux front end for the application, with reac
 - List all of the posts
 - Have a control for changing the sort method for the list, including at minimum, order by voteScore and order by timestamp
 - Have a control for adding a new post
-![default](../client/public/images/default.png)
+![default](./client/public/images/default.png)
 
 ### Category View
 - Identical to the default view, but filtered to only include posts with the selected category
-![category](../client/public/images/category.png)
+![category](./client/public/images/category.png)
 
 ### Post Detail View
 - Show the details of a post, including: Title, Body, Author, timestamp (in user readable format), and vote score
@@ -43,13 +42,13 @@ Using the server, I built a React/Redux front end for the application, with reac
 - Have a control to add a new comment.
 - Comment form  
 - Comments can be edited or deleted
-![post](../client/public/images/post.png)
+![post](./client/public/images/post.png)
 
 
 ### Create/Edit View
 - Have a form to create new post or edit existing posts
 - When editing, existing data should is populated in the form
-![edit](../client/public/images/edit.png)
+![edit](./client/public/images/edit.png)
 
 
 
